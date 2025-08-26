@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Utensil Store{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h2>Welcome to Utensil Store!</h2>
+        <p>Quality utensils for cooking, baking, and serving.</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'products' %}" class="btn">Shop Now</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn">Login to Start</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

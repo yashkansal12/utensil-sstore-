@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Your Cart</h2>
+{% if orders %}
+  <table border="1" cellpadding="10">
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+    {% for order in orders %}
+      <tr>
+        <td><img src="{{ order.utensil.image.url }}" width="80"></td>
+        <td>{{ order.utensil.name }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>₹{{ order.utensil.price }}</td>
+        <td>₹{{ order.total }}</td>
+        <td>
+          <a href="{% url 'remove_from_cart' order.id %}">Remove</a>
+        </td>
+      </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="4" align="right"><strong>Total:</strong></td>
+      <td colspan="2">₹{{ total_price }}</td>
+    </tr>
+  </table>
+  <br>
+  <a href="{% url 'products' %}">Continue Shopping</a>
+{% else %}
+  <p>Your cart is empty. <a href="{% url 'products' %}">Shop Now</a></p>
+{% endif %}
+
+{% endblock %}

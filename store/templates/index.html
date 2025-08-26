@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Utensil Store</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="font-family: Arial, sans-serif; margin:0; padding:0;">
+
+    <!-- Navbar -->
+    <header style="background:#333; color:white; padding:15px; text-align:center;">
+        <h2>🍴 Utensil Store</h2>
+        <nav>
+            <a href="/" style="color:white; margin:0 15px;">Home</a>
+            <a href="{% url 'products' %}" style="color:white; margin:0 15px;">Shop</a>
+            <a href="{% url 'cart' %}" style="color:white; margin:0 15px;">Cart</a>
+            <a href="{% url 'login' %}" style="color:white; margin:0 15px;">Login</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="background:#f4f4f4; padding:50px; text-align:center;">
+        <h1>Welcome to the Utensil Store</h1>
+        <p>High-quality utensils at the best prices.</p>
+        <a href="{% url 'products' %}" style="background:#333; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">
+            Shop Now
+        </a>
+    </section>
+
+    <!-- Products Showcase -->
+    <section style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; padding:40px;">
+        <div style="border:1px solid #ddd; padding:20px; text-align:center;">
+            <img src="https://plus.unsplash.com/premium_photo-1715703154376-8ea2d6baf888?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Spoon Set" width="200">
+            <h3>Spoon Set</h3>
+            <p>₹299</p>
+        </div>
+        <div style="border:1px solid #ddd; padding:20px; text-align:center;">
+            <img src="https://images.unsplash.com/photo-1688399104634-61a524f623ed?q=80&w=882&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cooking Pan" width="200">
+            <h3>Cooking Pan</h3>
+            <p>₹699</p>
+        </div>
+        <div style="border:1px solid #ddd; padding:20px; text-align:center;">
+            <img src="https://images.unsplash.com/photo-1711936432802-6ca24117c4a2?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D0" alt="Steel Bowl" width="200">
+            <h3>Steel Bowl</h3>
+            <p>₹199</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background:#333; color:white; text-align:center; padding:20px;">
+        <p>&copy; 2025 Utensil Store. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
