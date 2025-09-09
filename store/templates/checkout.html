@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Utensil Store</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="font-family: Arial, sans-serif; margin:0; padding:0;">
+
+<header style="background:#333; color:white; padding:15px; text-align:center;">
+    <h2>🍴 Utensil Store</h2>
+</header>
+
+<section style="padding:40px; max-width:600px; margin:0 auto;">
+    <h1>Checkout</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div style="margin-bottom:15px;">
+            <label>Full Name:</label><br>
+            <input type="text" name="name" required style="width:100%; padding:10px;">
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label>Address:</label><br>
+            <textarea name="address" rows="3" required style="width:100%; padding:10px;"></textarea>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label>Phone:</label><br>
+            <input type="text" name="phone" required style="width:100%; padding:10px;">
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label>Payment Method:</label><br>
+            <select name="payment_method" required style="width:100%; padding:10px;">
+                <option value="cod">Cash on Delivery</option>
+                <option value="upi">UPI</option>
+                <option value="card">Credit/Debit Card</option>
+            </select>
+        </div>
+
+        <button type="submit" style="background:#333; color:white; padding:12px 20px; border:none; cursor:pointer; width:100%;">
+            Place Order
+        </button>
+    </form>
+</section>
+
+<footer style="background:#333; color:white; text-align:center; padding:20px; margin-top:30px;">
+    <p>&copy; 2025 Utensil Store. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

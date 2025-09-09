@@ -1,0 +1,20 @@
+{% extends 'base.html' %}  <!-- if you use a base template -->
+{% block content %}
+
+<h2 style="text-align:center;">Search Results for "{{ query }}"</h2>
+
+<section style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; padding:40px;">
+    {% if results %}
+        {% for item in results %}
+            <div style="border:1px solid #ddd; padding:20px; text-align:center;">
+                <img src="{{ item.image }}" alt="{{ item.name }}" width="200">
+                <h3>{{ item.name }}</h3>
+                <p>₹{{ item.price }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center;">No utensils found.</p>
+    {% endif %}
+</section>
+
+{% endblock %}

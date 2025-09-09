@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width:500px; margin:30px auto; padding:20px; border:1px solid #ddd; border-radius:10px;">
+    <h2 style="text-align:center;">Add New Product</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="padding:10px 20px; background:#f8b400; color:#fff; border:none; border-radius:5px; cursor:pointer;">
+            Add Product
+        </button>
+    </form>
+</div>
+{% endblock %}

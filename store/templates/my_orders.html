@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="text-align:center; margin:20px 0;">📦 My Orders</h2>
+
+{% if orders %}
+    <div style="width:85%; margin:0 auto;">
+        {% for order in orders %}
+            <div style="display:flex; align-items:center; border:1px solid #ddd; border-radius:10px; margin:15px 0; padding:15px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+                
+                <!-- Product Image -->
+                <img src="{{ order.utensil.image}}" 
+                     alt="{{ order.utensil.name }}" 
+                     style="width:100px; height:100px; object-fit:cover; border-radius:8px; margin-right:20px;">
+
+                <!-- Product Details -->
+                <div style="flex:1;">
+                    <h3 style="margin:0; color:#333;">{{ order.utensil.name }}</h3>
+                    <p style="margin:5px 0; color:#555;">Price: ₹{{ order.utensil.price }}</p>
+                    <p style="margin:5px 0; color:#555;">Quantity: {{ order.quantity }}</p>
+                    <p style="margin:5px 0; color:#777; font-size:14px;">
+                        Ordered on: {{ order.ordered_at|date:"M d, Y H:i" }}
+                    </p>
+                </div>
+
+                <!-- Order Status (optional future use) -->
+                <div style="text-align:right;">
+                    <span style="background:#4CAF50; color:white; padding:5px 10px; border-radius:5px; font-size:14px;">
+                        ✅ Confirmed
+                    </span>
+                    <a href="{% url 'download_invoice' order.id %}" 
+                       style="background:#007BFF; color:white; padding:6px 12px; border-radius:5px; text-decoration:none; font-size:14px;">
+                        📄 Download Invoice
+                     </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p style="text-align:center; margin:30px; font-size:18px; color:#777;">
+        You haven’t placed any orders yet.
+    </p>
+{% endif %}
+{% endblock %}

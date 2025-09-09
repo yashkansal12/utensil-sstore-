@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="text-align:center; margin:20px;">My Account</h2>
+
+<div style="max-width:600px; margin:auto; border:1px solid #ddd; padding:20px; border-radius:8px; text-align:center;">
+
+    {% if user.is_authenticated %}
+        <p>Welcome, <strong>{{ user.username }}</strong> 👋</p>
+
+        <div style="margin-top:20px;">
+            <a href="{% url 'my_orders' %}" style="display:block; margin:10px 0; text-decoration:none; color:#333; font-size:18px;">
+                📦 My Orders
+            </a>
+            <a href="/Contact/" style="display:block; margin:10px 0; text-decoration:none; color:#333; font-size:18px;">
+                 📞 Contact Us
+            </a>
+            <a href="{% url 'logout' %}" style="display:block; margin:10px 0; text-decoration:none; color:red; font-size:18px;">
+                🚪 Logout
+            </a>
+        </div>
+
+    {% else %}
+        <p>You are not logged in.</p>
+        <a href="{% url 'login' %}" style="background:#333; color:white; padding:10px 20px; border-radius:5px; text-decoration:none;">
+            🔑 Login
+        </a>
+    {% endif %}
+</div>
+{% endblock %}
