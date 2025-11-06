@@ -3,8 +3,96 @@
 {% block title %}Login - Utensil Store{% endblock %}
 
 {% block content %}
+
+<style>
+/* ===== Login Page Styles ===== */
+.form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #e0f7ff, #f0f0f0);
+}
+
+.form-container {
+    background: #fff;
+    padding: 40px 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.form-container h2 {
+    font-size: 2rem;
+    color: #1e90ff;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-container input:focus {
+    border-color: #1e90ff;
+    box-shadow: 0 0 8px rgba(30,144,255,0.3);
+    outline: none;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #1e90ff, #00c6ff);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.form-container button:hover {
+    background: linear-gradient(135deg, #0b74d1, #00a6e0);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.form-container p {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.form-container p a {
+    color: #1e90ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.form-container p a:hover {
+    text-decoration: underline;
+}
+</style>
+
 <section class="form-section">
-    <div class="container">
+    <div class="form-container">
         <h2>Login</h2>
         <form method="POST">
             {% csrf_token %}
@@ -15,4 +103,5 @@
         <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
     </div>
 </section>
+
 {% endblock %}

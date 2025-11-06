@@ -9,7 +9,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UtensilForm
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
-
+from datetime import timedelta
+from django.utils import timezone
+from django.contrib import messages
 
 # Home Page
 def index(request):
@@ -115,15 +117,16 @@ def search(request):
         results = Utensil.objects.filter(name__icontains=query)  # case-insensitive match
 
     return render(request, 'store/search.html', {'query': query, 'results': results})
-
+ # my orders
 def my_orders(request):
     orders = Order.objects.filter(user=request.user, ordered=True).order_by('-ordered_at')
     return render(request, 'my_orders.html', {'orders': orders})
-
+# account
 def account(request):
     orders = request.user.order_set.all().order_by('-ordered_at')  # user ke saare orders
     return render(request, 'account.html', {'orders': orders})
 
+# for update in quantity in cart
 def update_quantity(request, order_id):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -144,7 +147,7 @@ def update_quantity(request, order_id):
 
     return redirect("cart")
 
-
+# for contact
 def contact_view(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -162,6 +165,7 @@ def contact_view(request):
 
     return render(request, "Contact.html") 
 
+# for order checkout 
 def checkout(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -222,11 +226,7 @@ def edit_product(request, pk):
 
     return render(request, "edit_product.html", {"form": form, "product": product})
 
-
-from reportlab.pdfgen import canvas
-from django.http import HttpResponse
-from .models import Order
-
+# download invoice
 @login_required
 def download_invoice(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
@@ -257,3 +257,20 @@ def download_invoice(request, order_id):
     p.save()
     return response
     
+# update order
+def update_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    if timezone.now() - order.ordered_at > timedelta(days=5):
+        messages.error(request, "❌ You can no longer update this order (time limit exceeded).")
+        return redirect('my_orders')
+    # your update form logic here
+# cancel order
+def cancel_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    if timezone.now() - order.ordered_at > timedelta(days=5):
+        messages.error(request, "❌ You can no longer cancel this order (time limit exceeded).")
+        return redirect('my_orders')
+    order.delete()
+    messages.success(request, "✅ Your order has been cancelled successfully.")
+    return redirect('my_orders')
+

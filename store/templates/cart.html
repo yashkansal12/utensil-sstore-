@@ -1,9 +1,161 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<style>
+  /* ===== Cart Page Styles ===== */
+  h2 {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2rem;
+      color: #1e90ff;
+  }
+
+  .cart-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  }
+
+  table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 12px;
+  }
+
+  th, td {
+      padding: 12px 10px;
+      text-align: center;
+      vertical-align: middle;
+  }
+
+  th {
+      background-color: #1e90ff;
+      color: white;
+      border-radius: 10px;
+      font-weight: 500;
+  }
+
+  td {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+  }
+
+  img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  /* Quantity buttons */
+  .quantity-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+  }
+
+  .quantity-form button {
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+  }
+
+  .quantity-form button:hover {
+      background-color: #0b74d1;
+      transform: scale(1.1);
+  }
+
+  .quantity-form .quantity {
+      min-width: 25px;
+      display: inline-block;
+      text-align: center;
+  }
+
+  /* Action buttons */
+  .btn {
+      display: inline-block;
+      margin: 15px 10px 0 0;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: all 0.3s;
+  }
+
+  .btn:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+  }
+
+  .continue-shopping {
+      display: inline-block;
+      margin: 15px 10px 0 0;
+      padding: 10px 20px;
+      background-color: #1e90ff;
+      color: white;
+      font-weight: bold;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: all 0.3s;
+  }
+
+  .continue-shopping:hover {
+      background-color: #0b74d1;
+      transform: translateY(-2px);
+  }
+
+  /* Empty cart message */
+  .empty-cart {
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 30px 0;
+  }
+
+  .empty-cart a {
+      color: #1e90ff;
+      text-decoration: none;
+      font-weight: bold;
+  }
+
+  .empty-cart a:hover {
+      text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+      table, th, td {
+          font-size: 0.9rem;
+      }
+
+      img {
+          width: 60px;
+          height: 60px;
+      }
+
+      .btn, .continue-shopping {
+          padding: 8px 15px;
+          font-size: 0.9rem;
+      }
+  }
+</style>
+
 <h2>Your Cart</h2>
+
+<div class="cart-container">
 {% if orders %}
-  <table border="1" cellpadding="10">
+  <table>
     <tr>
       <th>Image</th>
       <th>Name</th>
@@ -14,7 +166,7 @@
     </tr>
     {% for order in orders %}
       <tr>
-        <td><img src="{{ order.utensil.image }}" width="80" alt="{{ order.utensil.name }}"></td>
+        <td><img src="{{ order.utensil.image }}" alt="{{ order.utensil.name }}"></td>
         <td>{{ order.utensil.name }}</td>
 
         <td>
@@ -36,7 +188,7 @@
         <td>₹{{ order.utensil.price }}</td>
         <td>₹{{ order.total }}</td>
         <td>
-          <a href="{% url 'remove_from_cart' order.id %}">Remove</a>
+          <a href="{% url 'remove_from_cart' order.id %}" class="btn">Remove</a>
         </td>
       </tr>
     {% endfor %}
@@ -45,11 +197,15 @@
       <td colspan="2">₹{{ total_price }}</td>
     </tr>
   </table>
-  <br>
-  <a href="{% url 'products' %}">Continue Shopping</a>
+
+  <a href="{% url 'products' %}" class="continue-shopping">Continue Shopping</a>
   <a href="{% url 'checkout' %}" class="btn">Checkout</a>
+
 {% else %}
-  <p>Your cart is empty. <a href="{% url 'products' %}">Shop Now</a></p>
+  <div class="empty-cart">
+    <p>Your cart is empty. <a href="{% url 'products' %}">Shop Now</a></p>
+  </div>
 {% endif %}
+</div>
 
 {% endblock %}

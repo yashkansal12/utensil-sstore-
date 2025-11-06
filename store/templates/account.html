@@ -1,29 +1,188 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<h2 style="text-align:center; margin:20px;">My Account</h2>
 
-<div style="max-width:600px; margin:auto; border:1px solid #ddd; padding:20px; border-radius:8px; text-align:center;">
+<style>
+    /* ===== My Account Page Styles ===== */
+    .account-card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-    {% if user.is_authenticated %}
-        <p>Welcome, <strong>{{ user.username }}</strong> 👋</p>
+    .account-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
 
-        <div style="margin-top:20px;">
-            <a href="{% url 'my_orders' %}" style="display:block; margin:10px 0; text-decoration:none; color:#333; font-size:18px;">
-                📦 My Orders
-            </a>
-            <a href="/Contact/" style="display:block; margin:10px 0; text-decoration:none; color:#333; font-size:18px;">
-                 📞 Contact Us
-            </a>
-            <a href="{% url 'logout' %}" style="display:block; margin:10px 0; text-decoration:none; color:red; font-size:18px;">
-                🚪 Logout
-            </a>
+    .account-header {
+        background: linear-gradient(135deg, #1e90ff, #00c6ff);
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .account-header h2 {
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .profile-img {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s;
+    }
+
+    .profile-img:hover {
+        transform: scale(1.05);
+    }
+
+    .account-body {
+        padding: 40px 30px;
+        text-align: center;
+    }
+
+    .account-body h4 {
+        font-size: 1.5rem;
+        color: #1e90ff;
+        margin-bottom: 5px;
+    }
+
+    .account-body p {
+        color: #777;
+        margin-bottom: 25px;
+        font-size: 1rem;
+    }
+
+    .dashboard-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .dashboard-links a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .dashboard-links a span {
+        margin-right: 12px;
+        font-size: 1.2rem;
+    }
+
+    .dashboard-links a:hover {
+        transform: translateX(5px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-links .text-danger:hover {
+        background-color: #ffe5e5;
+    }
+
+    .btn-login {
+        background: linear-gradient(135deg, #1e90ff, #00c6ff);
+        color: white;
+        font-weight: bold;
+        border-radius: 25px;
+        padding: 12px 35px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        text-decoration: none;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        color: white;
+    }
+
+    .account-footer {
+        background-color: #f8f9fa;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #777;
+    }
+
+    @media(max-width: 576px){
+        .account-body {
+            padding: 30px 15px;
+        }
+
+        .dashboard-links a {
+            font-size: 0.95rem;
+        }
+
+        .account-header h2 {
+            font-size: 1.7rem;
+        }
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Account Card -->
+            <div class="card account-card">
+                
+                <!-- Header -->
+                <div class="account-header">
+                    <h2>👤 My Account</h2>
+                </div>
+
+                <!-- Body -->
+                <div class="account-body">
+                    
+                    {% if user.is_authenticated %}
+                        <div class="mb-4">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
+                                 alt="Profile Icon" class="profile-img">
+                            <h4>{{ user.username }}</h4>
+                            <p>Welcome back to Utensil Store 👋</p>
+                        </div>
+
+                        <!-- Dashboard Links -->
+                        <div class="dashboard-links">
+                            <a href="{% url 'my_orders' %}">
+                                <span>📦</span> My Orders
+                            </a>
+                            <a href="/Contact/">
+                                <span>📞</span> Contact Us
+                            </a>
+                            <a href="{% url 'logout' %}" class="text-danger">
+                                <span>🚪</span> Logout
+                            </a>
+                        </div>
+                    
+                    {% else %}
+                        <p class="text-muted fs-5">You are not logged in.</p>
+                        <a href="{% url 'login' %}" class="btn-login mt-3">
+                            🔑 Login
+                        </a>
+                    {% endif %}
+                </div>
+
+                <!-- Footer -->
+                <div class="account-footer">
+                    © 2025 Utensil Store
+                </div>
+            </div>
+
         </div>
-
-    {% else %}
-        <p>You are not logged in.</p>
-        <a href="{% url 'login' %}" style="background:#333; color:white; padding:10px 20px; border-radius:5px; text-decoration:none;">
-            🔑 Login
-        </a>
-    {% endif %}
+    </div>
 </div>
+
 {% endblock %}

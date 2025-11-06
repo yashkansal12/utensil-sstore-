@@ -8,7 +8,7 @@
             <div style="display:flex; align-items:center; border:1px solid #ddd; border-radius:10px; margin:15px 0; padding:15px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
                 
                 <!-- Product Image -->
-                <img src="{{ order.utensil.image}}" 
+                <img src="{{ order.utensil.image }}" 
                      alt="{{ order.utensil.name }}" 
                      style="width:100px; height:100px; object-fit:cover; border-radius:8px; margin-right:20px;">
 
@@ -22,15 +22,34 @@
                     </p>
                 </div>
 
-                <!-- Order Status (optional future use) -->
+                <!-- Order Actions -->
                 <div style="text-align:right;">
-                    <span style="background:#4CAF50; color:white; padding:5px 10px; border-radius:5px; font-size:14px;">
+                    <span style="background:#4CAF50; color:white; padding:5px 10px; border-radius:5px; font-size:14px; display:inline-block; margin-bottom:8px;">
                         ✅ Confirmed
                     </span>
+                    <br>
                     <a href="{% url 'download_invoice' order.id %}" 
-                       style="background:#007BFF; color:white; padding:6px 12px; border-radius:5px; text-decoration:none; font-size:14px;">
-                        📄 Download Invoice
-                     </a>
+                       class="btn btn-sm btn-primary" style="margin-bottom:5px;">
+                        📄 Invoice
+                    </a>
+                    <br>
+
+                    {% if order.ordered_at|timesince < "5 days" %}
+                        <a href="{% url 'update_order' order.id %}" 
+                           class="btn btn-sm btn-warning" style="margin-bottom:5px;">
+                            ✏️ Update
+                        </a>
+                        <br>
+                        <a href="{% url 'cancel_order' order.id %}" 
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to cancel this order?');">
+                            ❌ Cancel
+                        </a>
+                    {% else %}
+                        <p style="color:#888; font-size:14px; margin-top:8px;">
+                            ⏳ Update/Cancel expired
+                        </p>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

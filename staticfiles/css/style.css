@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: #333;
+}
+
+header {
+    background: #f8b400;
+    padding: 20px 0;
+}
+
+header h1 {
+    text-align: center;
+    color: #fff;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: url('https://via.placeholder.com/1200x400') no-repeat center/cover;
+    color: #fff;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #fff;
+    color: #f8b400;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.product-card .btn {
+    margin-top: 10px;
+}
+
+.form-section {
+    max-width: 400px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+form input, form button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 20px;
+}
