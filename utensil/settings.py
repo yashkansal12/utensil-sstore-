@@ -22,10 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-05d-maoo$z2(+r$p0ossk5q*@*$k8$gec4b#0t%w90k4)$&0fb'
-
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = FALSE
 
 
 
@@ -33,9 +32,7 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME, '127.0.0.1', 'localhost']
 else:
-   ALLOWED_HOSTS = ['utensils-store.onrender.com', '127.0.0.1', 'localhost']
-
-
+    ALLOWED_HOSTS = ['utensils-store.onrender.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
