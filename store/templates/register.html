@@ -3,16 +3,127 @@
 {% block title %}Register - Utensil Store{% endblock %}
 
 {% block content %}
-<section class="form-section">
-    <div class="container">
-        <h2>Register</h2>
+<style>
+    .auth-wrapper {
+        min-height: 100vh;
+        background: #f4f6f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .auth-card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 460px;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0px 8px 25px rgba(0,0,0,0.08);
+        transition: 0.3s ease;
+    }
+
+    .auth-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 12px 30px rgba(0,0,0,0.12);
+    }
+
+    .auth-card h2 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #2c3e50;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .auth-card p {
+        text-align: center;
+        font-size: 14px;
+        margin-bottom: 25px;
+        color: #6c757d;
+    }
+
+    .auth-card input,
+    .auth-card textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ced4da;
+        border-radius: 50px;
+        outline: none;
+        transition: 0.2s;
+        font-size: 15px;
+    }
+
+    .auth-card textarea {
+        border-radius: 12px;
+        resize: none;
+    }
+
+    .auth-card input:focus,
+    .auth-card textarea:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 6px rgba(40,167,69,0.2);
+    }
+
+    .auth-card button {
+        width: 100%;
+        background-color: #28a745;
+        color: white;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 50px;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .auth-card button:hover {
+        background-color: #1e7e34;
+        transform: scale(1.03);
+    }
+
+    .auth-card .login-text {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .auth-card .login-text a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .auth-card .login-text a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<section class="auth-wrapper">
+    <div class="auth-card">
+        <h2>Create Account 🛍️</h2>
+        <p>Join and start shopping with us</p>
+
         <form method="POST">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+
+            <input type="text" name="username" placeholder="Full Name / Username" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <textarea name="address" rows="3" placeholder="Enter Full Address"></textarea>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="Confirm Password" required>
+
             <button type="submit">Register</button>
         </form>
-        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+        <div class="login-text">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </div>
     </div>
 </section>
 {% endblock %}
